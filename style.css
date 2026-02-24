@@ -1,0 +1,186 @@
+/* --- Root & Resets --- */
+:root {
+    --nav-height: 44px;
+    --apple-black: #1d1d1f;
+    --apple-white: #f5f5f7;
+    --apple-blue: #0071e3;
+    --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: #fff;
+    color: var(--apple-black);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Navigation --- */
+.apple-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    z-index: 9999;
+}
+
+.nav-container {
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    padding: 0 22px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--apple-black);
+    font-size: 12px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.nav-link:hover { opacity: 1; }
+.logo { font-size: 18px; opacity: 1; }
+
+/* --- Hero Units --- */
+.unit-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 12px solid #fff;
+}
+
+.dark-theme { background-color: #000; color: #fff; }
+.light-theme { background-color: var(--apple-white); color: var(--apple-black); }
+
+.unit-title {
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+}
+
+.unit-subtitle {
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 6px;
+}
+
+.unit-cta {
+    margin-top: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    font-size: 17px;
+    padding: 8px 16px;
+    border-radius: 980px;
+    margin: 0 10px;
+}
+
+.btn-primary { background: var(--apple-blue); color: #fff; }
+.btn-secondary { border: 1px solid var(--apple-blue); color: var(--apple-blue); }
+.btn-secondary:hover { background: var(--apple-blue); color: #fff; }
+
+.unit-image img {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* --- Bento Grid --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+}
+
+.grid-item {
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.grid-title { font-size: 40px; font-weight: 600; }
+.grid-subtitle { font-size: 20px; margin-top: 4px; }
+.series { color: #f56300; font-weight: 600; font-size: 14px; display: block; }
+
+/* Placeholder Backgrounds */
+.watch-s10 { background-color: #000; background-image: url('https://www.apple.com/v/watch-series-10/a/images/overview/select/product_s10__de9m8u79m76u_large.jpg'); background-size: contain; background-repeat: no-repeat; background-position: bottom; }
+.ipad-air { background-color: #fafafa; }
+.macbook-air { background-color: #fff; }
+
+/* --- Footer --- */
+.apple-footer {
+    background-color: var(--apple-white);
+    padding: 50px 0;
+    color: #6e6e73;
+    font-size: 12px;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 22px;
+}
+
+.footer-notes {
+    border-bottom: 1px solid #d2d2d7;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-directory {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 40px;
+}
+
+.directory-title { color: var(--apple-black); margin-bottom: 10px; }
+.footer-directory ul { list-style: none; }
+.footer-directory li { margin-bottom: 8px; }
+.footer-directory a { text-decoration: none; color: #6e6e73; }
+.footer-directory a:hover { text-decoration: underline; color: var(--apple-black); }
+
+.footer-legal {
+    border-top: 1px solid #d2d2d7;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.legal-links a {
+    text-decoration: none;
+    color: #424245;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid #d2d2d7;
+}
+
+.legal-links a:first-child { border: none; }
