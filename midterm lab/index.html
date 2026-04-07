@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<<<<<<< HEAD
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 2 - Responsive Top Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">Apple</div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        &#9776;
+      </button>
+      <nav class="nav-right" id="navRight">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#">Store</a></li>
+          <li><a href="#">Mac</a></li>
+          <li><a href="#">iPad</a></li>
+          <li><a href="#">iPhone</a></li>
+          <li><a href="#">Watch</a></li>
+          <li><a href="#">AirPods</a></li>
+          <li><a href="#">TV & Home</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+        <div class="icons">Search Cart</div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-iphone light-text">
+      <div class="content">
+        <h1>iPhone</h1>
+        <p>Meet the latest iPhone lineup.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#">Learn more</a>
+          <a class="btn outline" href="#">Shop iPhone</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero hero-ipad dark-text">
+      <div class="content">
+        <h1>iPad Air</h1>
+        <p>Now supercharged by the M3 chip.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#">Learn more</a>
+          <a class="btn outline" href="#">Buy</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero hero-watch dark-text">
+      <div class="content">
+        <h1>Apple Watch</h1>
+        <p>The ultimate way to watch your health.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#">Learn more</a>
+          <a class="btn outline" href="#">Buy</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-deals-section">
+      <div class="section-heading">
+        <h2>Featured Deals</h2>
+        <p>Products loaded with AJAX.</p>
+      </div>
+
+      <div class="featured-grid" id="featuredDealsGrid" aria-live="polite">
+        <div class="loading-state">Loading featured deals...</div>
+      </div>
+    </section>
+
+    <section class="slider-section">
+      <h2>Endless Entertainment</h2>
+      <div class="slider-window">
+        <div class="slider-track">
+          <div class="slide s1"><span>Stream now</span></div>
+          <div class="slide s2"><span>Watch now</span></div>
+          <div class="slide s3"><span>Top series</span></div>
+          <div class="slide s4"><span>Live events</span></div>
+          <div class="slide s5"><span>New movies</span></div>
+          <div class="slide s1"><span>Stream now</span></div>
+          <div class="slide s2"><span>Watch now</span></div>
+          <div class="slide s3"><span>Top series</span></div>
+          <div class="slide s4"><span>Live events</span></div>
+          <div class="slide s5"><span>New movies</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <p>
+        Learn more about how Apple Card applications are evaluated at support.apple.com.
+      </p>
+      <p>
+        A subscription is required for Apple Arcade, Apple Fitness+, Apple Music, and Apple TV+.
+      </p>
+      <p>
+        Features are subject to change. Some features may not be available in all regions.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <div class="column">
+        <h4>Shop and Learn</h4>
+        <ul>
+          <li>Store</li>
+          <li>Mac</li>
+          <li>iPad</li>
+          <li>iPhone</li>
+          <li>Watch</li>
+          <li>AirPods</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>Account</h4>
+        <ul>
+          <li>Manage Your Apple Account</li>
+          <li>Apple Store Account</li>
+          <li>iCloud.com</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>Apple Store</h4>
+        <ul>
+          <li>Find a Store</li>
+          <li>Genius Bar</li>
+          <li>Order Status</li>
+          <li>Shopping Help</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>For Business</h4>
+        <ul>
+          <li>Apple and Business</li>
+          <li>Shop for Business</li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <h4>About Apple</h4>
+        <ul>
+          <li>Newsroom</li>
+          <li>Careers</li>
+          <li>Investors</li>
+          <li>Contact Apple</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>
+        More ways to shop: Find an Apple Store or other retailer near you. Or call 1-800-MY-APPLE.
+      </p>
+      <div class="bottom-row">
+        <span>Copyright (c) 2026 Apple Inc. All rights reserved.</span>
+        <div class="legal">
+          <span>Privacy Policy</span>
+          <span>Terms of Use</span>
+          <span>Sales and Refunds</span>
+          <span>Legal</span>
+          <span>Site Map</span>
+        </div>
+        <span>United States</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="deal-modal" id="dealModal" aria-hidden="true">
+    <div class="deal-modal-backdrop" data-close-modal></div>
+    <div class="deal-modal-box" role="dialog" aria-modal="true" aria-labelledby="dealModalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close quick view">&times;</button>
+      <img id="dealModalImage" src="" alt="" />
+      <div class="modal-content">
+        <p class="modal-category" id="dealModalCategory"></p>
+        <h3 id="dealModalTitle"></h3>
+        <p class="modal-description" id="dealModalDescription"></p>
+        <div class="modal-meta">
+          <span id="dealModalRating"></span>
+          <span id="dealModalPrice"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+=======
+<<<<<<< HEAD
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Clone</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+<div class="nav-container">
+
+<div class="logo">
+<i class="fa-brands fa-apple"></i>
+</div>
+
+<ul class="nav-menu">
+<li>Store</li>
+<li>Mac</li>
+<li>iPad</li>
+<li>iPhone</li>
+<li>Watch</li>
+<li>Vision</li>
+<li>AirPods</li>
+<li>TV & Home</li>
+<li>Entertainment</li>
+<li>Accessories</li>
+<li>Support</li>
+</ul>
+
+<div class="icons">
+<i class="fa-solid fa-magnifying-glass"></i>
+<i class="fa-solid fa-bag-shopping"></i>
+</div>
+
+</div>
+</header>
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+<h1>iPhone</h1>
+<p>Say hello to the latest generation of iPhone.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline">Shop iPhone</a>
+</div>
+
+<img src="images/1.jpg" class="main-img">
+</section>
+
+
+
+<!-- IPAD -->
+
+<section class="ipad">
+<h1>iPad <span>air</span></h1>
+<p>Now supercharged by the M3 chip.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline">Buy</a>
+</div>
+
+<img src="images/2.jpg" class="main-img">
+</section>
+
+
+
+<!-- MACBOOK -->
+
+<section class="macbook">
+<h1>MacBook Pro 14"</h1>
+<p>Supercharged by M5.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline-light">Buy</a>
+</div>
+
+<img src="images/3.jpg" class="main-img small">
+</section>
+
+
+
+<!-- GRID ROW 1 -->
+
+<section class="grid">
+
+<div class="card light">
+<h2><i class="fa-brands fa-apple"></i> WATCH SERIES 11</h2>
+<p>The ultimate way to watch your health.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline">Buy</a>
+</div>
+
+<img src="images/4.jpg">
+</div>
+
+
+<div class="card dark">
+<h2><i class="fa-brands fa-apple"></i> WATCH</h2>
+<p>The new Black Unity band.<br>
+Inspired by the power of connection.</p>
+
+<div class="buttons">
+<a class="btn white">Shop</a>
+</div>
+
+<img src="images/5.jpg">
+</div>
+
+</section>
+
+
+
+<!-- GRID ROW 2 -->
+
+<section class="grid">
+
+<div class="card dark">
+<h2>iPad Pro</h2>
+<p>Advanced AI performance<br>
+and game-changing capabilities.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline-light">Buy</a>
+</div>
+
+<img src="images/6.jpg">
+</div>
+
+
+<div class="card light">
+<h2>AirPods Pro 3</h2>
+<p>The world’s best in-ear<br>
+Active Noise Cancellation.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline">Buy</a>
+</div>
+
+<img src="images/7.jpg">
+</div>
+
+</section>
+
+
+
+<!-- GRID ROW 3 -->
+
+<section class="grid">
+
+<div class="card light">
+<h2><i class="fa-brands fa-apple"></i> Trade In</h2>
+<p>Get up to $180–$650 in credit<br>
+when you trade in iPhone 13 or higher.</p>
+
+<div class="buttons">
+<a class="btn primary">Get your estimate</a>
+</div>
+
+<img src="images/8.jpg">
+</div>
+
+
+<div class="card light">
+<h2><i class="fa-brands fa-apple"></i> Card</h2>
+<p>Get up to 3% Daily Cash back<br>
+with every purchase.</p>
+
+<div class="buttons">
+<a class="btn primary">Learn more</a>
+<a class="btn outline">Apply now</a>
+</div>
+
+<img src="images/9.jpg">
+</div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-top">
+
+<p>
+Learn more about how Apple Card applications are evaluated at
+support.apple.com.
+</p>
+
+<p>
+A subscription is required for Apple Arcade, Apple Fitness+, Apple Music, and Apple TV.
+</p>
+
+<p>
+Features are subject to change. Some features may not be available in all regions.
+</p>
+
+</div>
+
+
+<div class="footer-links">
+
+<div>
+<h4>Shop and Learn</h4>
+<ul>
+<li>Store</li>
+<li>Mac</li>
+<li>iPad</li>
+<li>iPhone</li>
+<li>Watch</li>
+<li>AirPods</li>
+<li>TV & Home</li>
+<li>Accessories</li>
+<li>Gift Cards</li>
+</ul>
+</div>
+
+
+<div>
+<h4>Account</h4>
+<ul>
+<li>Manage Your Apple Account</li>
+<li>Apple Store Account</li>
+<li>iCloud.com</li>
+</ul>
+</div>
+
+
+<div>
+<h4>Apple Store</h4>
+<ul>
+<li>Find a Store</li>
+<li>Genius Bar</li>
+<li>Today at Apple</li>
+<li>Order Status</li>
+<li>Shopping Help</li>
+</ul>
+</div>
+
+
+<div>
+<h4>For Business</h4>
+<ul>
+<li>Apple and Business</li>
+<li>Shop for Business</li>
+</ul>
+</div>
+
+
+<div>
+<h4>About Apple</h4>
+<ul>
+<li>Newsroom</li>
+<li>Apple Leadership</li>
+<li>Careers</li>
+<li>Investors</li>
+<li>Contact Apple</li>
+</ul>
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+<p>
+More ways to shop: Find an Apple Store or other retailer near you.
+Or call 1-800-MY-APPLE.
+</p>
+
+<hr>
+
+<div class="bottom-row">
+<span>Copyright © 2026 Apple Inc. All rights reserved.</span>
+
+<div class="legal">
+<span>Privacy Policy</span>
+<span>Terms of Use</span>
+<span>Sales and Refunds</span>
+<span>Legal</span>
+<span>Site Map</span>
+</div>
+
+<span>United States</span>
+
+</div>
+
+</div>
+
+</footer>
+
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple - iPhone 17 Pro max, Watch, and more</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="apple-nav">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#" class="nav-link logo"></a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Store</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Mac</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">iPad</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">iPhone</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Watch</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Vision</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">AirPods</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">TV & Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Entertainment</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Accessories</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Support</a></li>
+                <li class="nav-item"><a href="#" class="nav-link icon">🔍</a></li>
+                <li class="nav-item"><a href="#" class="nav-link icon">👜</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        
+        <section class="unit-wrapper dark-theme" id="iphone-1-pro">
+            <div class="unit-copy">
+                <h2 class="unit-title">iPhone 6 Pro</h2>
+                <h3 class="unit-subtitle">Built for Apple Intelligence.</h3>
+                <div class="unit-cta">
+                    <a href="#" class="btn btn-primary">Learn more</a>
+                    <a href="#" class="btn btn-secondary">Buy</a>
+                </div>
+            </div>
+            <div class="unit-image">
+                <img src="https://www.apple.com/v/iphone-16-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" alt="">
+            </div>
+        </section>
+
+        <section class="unit-wrapper light-theme" id="iphone-16">
+            <div class="unit-copy">
+                <h2 class="unit-title">iPhone 16</h2>
+                <h3 class="unit-subtitle">Built for Apple Intelligence.</h3>
+                <div class="unit-cta">
+                    <a href="#" class="btn btn-primary">Learn more</a>
+                    <a href="#" class="btn btn-secondary">Buy</a>
+                </div>
+            </div>
+            <div class="unit-image">
+                <img src="https://www.apple.com/v/iphone-16/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" alt="">
+            </div>
+        </section>
+
+        <section class="grid-container">
+            <div class="grid-item watch-s10 dark-theme">
+                <div class="grid-copy">
+                    <h4 class="grid-title">WATCH</h4>
+                    <span class="series">SERIES 10</span>
+                    <p class="grid-subtitle">Thinstant classic.</p>
+                    <div class="grid-cta">
+                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="#" class="btn btn-secondary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item ipad-air light-theme">
+                <div class="grid-copy">
+                    <h4 class="grid-title">iPad Air</h4>
+                    <p class="grid-subtitle">Two sizes. Faster chip. Does it all.</p>
+                    <div class="grid-cta">
+                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="#" class="btn btn-secondary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item macbook-air light-theme">
+                <div class="grid-copy">
+                    <h4 class="grid-title">MacBook Air</h4>
+                    <p class="grid-subtitle">Lean. Mean. M3 machine.</p>
+                    <div class="grid-cta">
+                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="#" class="btn btn-secondary">Buy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item fitness light-theme">
+                <div class="grid-copy">
+                    <h4 class="grid-title">Fitness+</h4>
+                    <p class="grid-subtitle">From HIIT to Meditation. There’s something for everyone.</p>
+                    <div class="grid-cta">
+                        <a href="#" class="btn btn-primary">Learn more</a>
+                        <a href="#" class="btn btn-secondary">Try it free</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="apple-footer">
+        <div class="footer-content">
+            <section class="footer-notes">
+                <p>1. Apple Intelligence is available now on iPhone 16 models, iPhone 15 Pro, and iPhone 15 Pro Max with Siri and device language set to English (U.S.).</p>
+                <p>2. Subscription required for Apple Fitness+.</p>
+            </section>
+            
+            <nav class="footer-directory">
+                <div class="directory-column">
+                    <h3 class="directory-title">Shop and Learn</h3>
+                    <ul>
+                        <li><a href="#">Store</a></li>
+                        <li><a href="#">Mac</a></li>
+                        <li><a href="#">iPad</a></li>
+                        <li><a href="#">iPhone</a></li>
+                        <li><a href="#">Watch</a></li>
+                        <li><a href="#">Vision</a></li>
+                    </ul>
+                </div>
+                <div class="directory-column">
+                    <h3 class="directory-title">Apple Wallet</h3>
+                    <ul>
+                        <li><a href="#">Wallet</a></li>
+                        <li><a href="#">Apple Card</a></li>
+                        <li><a href="#">Apple Pay</a></li>
+                        <li><a href="#">Apple Cash</a></li>
+                    </ul>
+                </div>
+                <div class="directory-column">
+                    <h3 class="directory-title">Account</h3>
+                    <ul>
+                        <li><a href="#">Manage Your Apple ID</a></li>
+                        <li><a href="#">Apple Store Account</a></li>
+                        <li><a href="#">iCloud.com</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <section class="footer-legal">
+                <div class="legal-copyright">Copyright © 2026 Apple Inc. All rights reserved.</div>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Sales and Refunds</a>
+                    <a href="#">Legal</a>
+                    <a href="#">Site Map</a>
+                </div>
+            </section>
+        </div>
+    </footer>
+>>>>>>> 61aecf4e883c1d5cff12230e6d0ba0dd2223913f
+
+</body>
+</html>
+>>>>>>> f45d953f7d6ab919d796884b3d4ff3afe4c6a7e2
