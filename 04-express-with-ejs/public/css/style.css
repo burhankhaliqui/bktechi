@@ -36,7 +36,7 @@ list-style:none;
 font-size:14px;
 }
 
-.nav-menu a{
+.nav-menu li a{
 text-decoration:none;
 color:inherit;
 }
