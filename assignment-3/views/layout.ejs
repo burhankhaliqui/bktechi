@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Apple Store' %></title>
+  <meta name="description" content="Shop Apple products – iPhone, Mac, iPad, Apple Watch, AirPods and Accessories.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo" aria-label="Apple">
+        <img src="/images/logo.png" alt="Apple">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+      <nav class="nav-right" id="navRight">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">Store</a></li>
+          <li><a href="/products?category=iPhone">iPhone</a></li>
+          <li><a href="/products?category=Mac">Mac</a></li>
+          <li><a href="/products?category=iPad">iPad</a></li>
+          <li><a href="/products?category=Apple+Watch">Apple Watch</a></li>
+          <li><a href="/products?category=AirPods">AirPods</a></li>
+          <li><a href="/products?category=Accessories">Accessories</a></li>
+        </ul>
+        <div class="icons">
+          <a href="/" title="Apple" class="icon-apple">
+            <img src="/images/logo.png" alt="Apple">
+          </a>
+          <a href="/products?search=" title="Search">&#128269;</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <p>More ways to shop: <a href="/products" style="color:#0071e3;">Find an Apple Store</a> or other retailer near you. Or call 1&#8209;800&#8209;MY&#8209;APPLE.</p>
+    </div>
+    <div class="footer-links">
+      <div class="column">
+        <h4>Shop and Learn</h4>
+        <ul>
+          <li><a href="/products?category=iPhone">iPhone</a></li>
+          <li><a href="/products?category=Mac">Mac</a></li>
+          <li><a href="/products?category=iPad">iPad</a></li>
+          <li><a href="/products?category=Apple+Watch">Apple Watch</a></li>
+          <li><a href="/products?category=AirPods">AirPods</a></li>
+          <li><a href="/products?category=Accessories">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Apple Store</h4>
+        <ul>
+          <li>Find a Store</li>
+          <li>Genius Bar</li>
+          <li>Order Status</li>
+          <li>Shopping Help</li>
+          <li>Apple Trade In</li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>For Education</h4>
+        <ul>
+          <li>Apple and Education</li>
+          <li>Shop for K–12</li>
+          <li>Shop for College</li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>About Apple</h4>
+        <ul>
+          <li>Newsroom</li>
+          <li>Apple Leadership</li>
+          <li>Careers</li>
+          <li>Investors</li>
+          <li>Contact Apple</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Copyright &copy; 2026 Apple Inc. All rights reserved.</p>
+      <div class="bottom-row">
+        <span>&nbsp;</span>
+        <div class="legal">
+          <span>Privacy Policy</span>
+          <span>Terms of Use</span>
+          <span>Sales and Refunds</span>
+          <span>Legal</span>
+          <span>Site Map</span>
+        </div>
+        <span>Pakistan</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('menuToggle');
+    const nav = document.getElementById('navRight');
+    if (btn && nav) {
+      btn.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
+    // Highlight active nav link
+    const currentPath = window.location.pathname;
+    const currentSearch = window.location.search;
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === currentPath + currentSearch || (href !== '/' && (currentPath + currentSearch).startsWith(href.split('?')[0]) && href.includes('category'))) {
+        if (href === currentPath + currentSearch) link.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

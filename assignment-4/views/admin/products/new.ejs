@@ -1,0 +1,46 @@
+<section class="card">
+  <div class="card-header">
+    <h2>New Product</h2>
+    <a class="btn" href="/admin/products">Back</a>
+  </div>
+
+  <% if (errors && errors.length) { %>
+    <div class="alert">Please fill: <%= errors.join(', ') %></div>
+  <% } %>
+
+  <form class="form" method="POST" action="/admin/products" enctype="multipart/form-data">
+    <div class="field">
+      <label>Name</label>
+      <input type="text" name="name" value="<%= form ? form.name : '' %>" required>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <textarea name="description" rows="4" required><%= form ? form.description : '' %></textarea>
+    </div>
+    <div class="field">
+      <label>Price</label>
+      <input type="number" name="price" step="0.01" min="0" value="<%= form ? form.price : '' %>" required>
+    </div>
+    <div class="field">
+      <label>Category</label>
+      <select name="category" required>
+        <option value="">Select</option>
+        <option value="iPhone">iPhone</option>
+        <option value="Mac">Mac</option>
+        <option value="iPad">iPad</option>
+        <option value="Apple Watch">Apple Watch</option>
+        <option value="AirPods">AirPods</option>
+        <option value="Accessories">Accessories</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Stock</label>
+      <input type="number" name="stock" min="0" value="<%= form ? form.stock : 0 %>" required>
+    </div>
+    <div class="field">
+      <label>Image</label>
+      <input type="file" name="image" accept="image/*">
+    </div>
+    <button class="btn primary" type="submit">Create</button>
+  </form>
+</section>
