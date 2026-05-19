@@ -1,0 +1,199 @@
+<%
+  /* ── Build base query string (no page) ── */
+  const qs = new URLSearchParams();
+  if (query.search)   qs.set('search',   query.search);
+  if (query.category) qs.set('category', query.category);
+  if (query.minPrice) qs.set('minPrice', query.minPrice);
+  if (query.maxPrice) qs.set('maxPrice', query.maxPrice);
+  if (query.sort)     qs.set('sort',     query.sort);
+  const base = '/products?' + qs.toString() + (qs.toString() ? '&' : '');
+
+  const APPLE_CATS = ['iPhone', 'Mac', 'iPad', 'Apple Watch', 'AirPods', 'Accessories'];
+
+  /* Badge colour class per category */
+  const badgeClass = {
+    'iPhone':       'badge-iphone',
+    'Mac':          'badge-mac',
+    'iPad':         'badge-ipad',
+    'Apple Watch':  'badge-watch',
+    'AirPods':      'badge-airpods',
+    'Accessories':  'badge-accessories',
+  };
+
+  const sortLabels = {
+    'name-asc':    'Name A → Z',
+    'name-desc':   'Name Z → A',
+    'price-asc':   'Price: Low → High',
+    'price-desc':  'Price: High → Low',
+    'rating-desc': 'Top Rated',
+  };
+%>
+
+<!-- ── Catalog Page Banner ── -->
+<div class="catalog-banner">
+  <h1>Apple Store</h1>
+  <p>The best of Apple, all in one place.</p>
+</div>
+
+<div class="catalog-wrapper">
+
+  <!-- ── Filter Sidebar ── -->
+  <aside class="filter-sidebar">
+    <h2 class="sidebar-title">Filters</h2>
+    <form action="/products" method="GET">
+      <!-- preserve sort -->
+      <input type="hidden" name="sort" value="<%= query.sort || 'name-asc' %>">
+
+      <div class="filter-group">
+        <label for="search">Search</label>
+        <input id="search" type="text" name="search"
+               placeholder="e.g. iPhone 16 Pro…"
+               value="<%= query.search %>" class="input-field">
+      </div>
+
+      <hr class="sidebar-divider">
+
+      <div class="filter-group">
+        <label for="category">Category</label>
+        <select id="category" name="category" class="input-field">
+          <option value="">All Products</option>
+          <% APPLE_CATS.forEach(cat => { %>
+            <option value="<%= cat %>" <%= query.category === cat ? 'selected' : '' %>><%= cat %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <hr class="sidebar-divider">
+
+      <div class="filter-group">
+        <label>Price Range ($)</label>
+        <div class="price-row">
+          <input type="number" name="minPrice" placeholder="Min" min="0"
+                 value="<%= query.minPrice %>" class="input-field price-input">
+          <span class="price-sep">–</span>
+          <input type="number" name="maxPrice" placeholder="Max" min="0"
+                 value="<%= query.maxPrice %>" class="input-field price-input">
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:20px;">
+        <button type="submit" class="btn primary btn-full">Apply Filters</button>
+        <a href="/products" class="btn btn-ghost btn-full">Clear All</a>
+      </div>
+    </form>
+  </aside>
+
+  <!-- ── Main Catalog ── -->
+  <section class="catalog-main">
+
+    <!-- Top bar -->
+    <div class="catalog-topbar">
+      <h1>
+        <% if (query.category) { %>
+          <%= query.category %>
+        <% } else { %>
+          All Products
+        <% } %>
+      </h1>
+      <div class="catalog-controls">
+        <span class="result-count"><%= total %> result<%= total !== 1 ? 's' : '' %></span>
+        <form action="/products" method="GET" id="sortForm">
+          <% const sortQs = new URLSearchParams(qs); %>
+          <% if (query.search)   sortQs.set('search',   query.search); %>
+          <% if (query.category) sortQs.set('category', query.category); %>
+          <% if (query.minPrice) sortQs.set('minPrice', query.minPrice); %>
+          <% if (query.maxPrice) sortQs.set('maxPrice', query.maxPrice); %>
+          <% ['search','category','minPrice','maxPrice'].forEach(k => { %>
+            <% if (query[k]) { %>
+              <input type="hidden" name="<%= k %>" value="<%= query[k] %>">
+            <% } %>
+          <% }) %>
+          <select name="sort" class="sort-select" onchange="this.form.submit()">
+            <% Object.entries(sortLabels).forEach(([val, label]) => { %>
+              <option value="<%= val %>" <%= query.sort === val ? 'selected' : '' %>><%= label %></option>
+            <% }) %>
+          </select>
+        </form>
+      </div>
+    </div>
+
+    <!-- Active filter chips -->
+    <% if (query.search || query.category || query.minPrice || query.maxPrice) { %>
+      <div class="active-filters">
+        <% if (query.search)   { %><span class="chip">&#128269; "<%= query.search %>"</span><% } %>
+        <% if (query.category) { %><span class="chip">&#127991; <%= query.category %></span><% } %>
+        <% if (query.minPrice) { %><span class="chip">Min $<%= query.minPrice %></span><% } %>
+        <% if (query.maxPrice) { %><span class="chip">Max $<%= query.maxPrice %></span><% } %>
+        <a href="/products" class="chip chip-clear">&#10005; Clear filters</a>
+      </div>
+    <% } %>
+
+    <!-- Product grid -->
+    <% if (products.length > 0) { %>
+      <div class="product-grid">
+        <% products.forEach(p => { %>
+          <div class="product-card">
+            <div class="card-img-wrap">
+              <img src="<%= p.image %>" alt="<%= p.name %>" class="card-img" loading="lazy">
+              <span class="category-badge <%= badgeClass[p.category] || '' %>"><%= p.category %></span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title"><%= p.name %></h3>
+              <p class="card-desc"><%= p.description %></p>
+              <div class="card-meta">
+                <div class="rating">
+                  <% for (let i = 1; i <= 5; i++) { %>
+                    <span class="<%= i <= Math.round(p.rating) ? 'star filled' : 'star' %>">&#9733;</span>
+                  <% } %>
+                  <span class="rating-num">(<%= p.rating.toFixed(1) %>)</span>
+                </div>
+                <span class="stock-badge <%= p.stock > 0 ? 'in-stock' : 'out-stock' %>">
+                  <%= p.stock > 0 ? `${p.stock} in stock` : 'Out of stock' %>
+                </span>
+              </div>
+              <div class="card-footer">
+                <span class="price">$<%= p.price.toFixed(2) %></span>
+                <form action="/bag/add/<%= p._id %>" method="POST">
+                  <button type="submit" class="card-btn" <%= p.stock <= 0 ? 'disabled' : '' %>>
+                    Add to Bag
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Pagination -->
+      <% if (totalPages > 1) { %>
+        <nav class="pagination" aria-label="Page navigation">
+          <% if (currentPage > 1) { %>
+            <a href="<%= base %>page=<%= currentPage - 1 %>" class="page-btn">&laquo; Prev</a>
+          <% } %>
+
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <% if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) { %>
+              <a href="<%= base %>page=<%= i %>"
+                 class="page-btn <%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+            <% } else if (i === currentPage - 3 || i === currentPage + 3) { %>
+              <span class="page-ellipsis">…</span>
+            <% } %>
+          <% } %>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="<%= base %>page=<%= currentPage + 1 %>" class="page-btn">Next &raquo;</a>
+          <% } %>
+        </nav>
+      <% } %>
+
+    <% } else { %>
+      <div class="empty-state">
+        <div class="empty-icon">&#128269;</div>
+        <h3>No products found</h3>
+        <p>Try adjusting your filters or <a href="/products">browse all Apple products</a>.</p>
+      </div>
+    <% } %>
+
+  </section>
+
+</div>

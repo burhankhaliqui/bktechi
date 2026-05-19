@@ -1,0 +1,43 @@
+<section class="card">
+  <div class="card-header">
+    <h2>Products</h2>
+    <a class="btn" href="/admin/products/new">Add Product</a>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (products.length === 0) { %>
+          <tr><td colspan="6" class="muted">No products found.</td></tr>
+        <% } %>
+        <% products.forEach(p => { %>
+          <tr>
+            <td>
+              <img class="thumb" src="<%= p.image %>" alt="<%= p.name %>">
+            </td>
+            <td><%= p.name %></td>
+            <td><%= p.category %></td>
+            <td>$<%= p.price.toFixed(2) %></td>
+            <td><%= p.stock %></td>
+            <td class="actions">
+              <a class="btn small" href="/admin/products/edit/<%= p._id %>">Edit</a>
+              <form method="POST" action="/admin/products/delete/<%= p._id %>" onsubmit="return confirm('Delete this product?')">
+                <button class="btn small danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

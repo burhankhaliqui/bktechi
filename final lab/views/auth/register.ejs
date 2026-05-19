@@ -1,0 +1,19 @@
+<section class="auth-card">
+  <h2>Register</h2>
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="auth-alert"><%= error %></div>
+  <% } %>
+  <form class="auth-form" action="/auth/register" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" required>
+
+    <label>Email</label>
+    <input type="email" name="email" required>
+
+    <label>Password</label>
+    <input type="password" name="password" required>
+
+    <button class="btn primary" type="submit">Register</button>
+  </form>
+  <p class="auth-meta">Already have an account? <a href="/auth/login">Login</a></p>
+</section>

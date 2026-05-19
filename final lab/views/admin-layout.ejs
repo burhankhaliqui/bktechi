@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title : 'Admin Panel' %></title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">Admin Panel</div>
+    <nav class="admin-nav">
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/products">Products</a>
+      <a href="/sales">Sales</a>
+      <a href="/">Back to Shop</a>
+      <a href="/auth/logout">Logout</a>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-header">
+      <h1><%= typeof title !== 'undefined' ? title : 'Admin' %></h1>
+      <span class="admin-badge"><%= user ? user.name : 'Admin' %></span>
+    </header>
+
+    <% if (success_msg && success_msg.length > 0) { %>
+      <% success_msg.forEach(msg => { %>
+        <div class="alert" style="background:#e9f7ef;border-color:#cfe9da;color:#1e7e34;"><%= msg %></div>
+      <% }) %>
+    <% } %>
+    <% if (error_msg && error_msg.length > 0) { %>
+      <% error_msg.forEach(msg => { %>
+        <div class="alert" style="background:#fdecec;border-color:#f8d7da;color:#b02a37;"><%= msg %></div>
+      <% }) %>
+    <% } %>
+
+    <%- body %>
+  </main>
+</body>
+</html>

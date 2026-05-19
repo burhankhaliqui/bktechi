@@ -1,0 +1,102 @@
+<section class="sales-page">
+  <div class="sales-grid">
+    <div class="sales-card">
+      <span>Total Revenue</span>
+      <strong id="totalRevenue">$<%= stats.totalRevenue.toFixed(2) %></strong>
+    </div>
+
+    <div class="sales-card">
+      <span>Total Orders</span>
+      <strong id="totalOrders"><%= stats.totalOrders %></strong>
+    </div>
+
+    <div class="sales-card">
+      <span>Top Selling Product</span>
+      <strong id="topProduct"><%= stats.topProduct %></strong>
+      <small id="topProductQty"><%= stats.topProductQty %> sold</small>
+    </div>
+  </div>
+
+  <section class="card">
+    <div class="card-header">
+      <h2>Recent Transactions</h2>
+      <span class="muted" id="lastUpdated">Updated just now</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="recentOrders">
+          <% if (stats.recentOrders.length === 0) { %>
+            <tr><td colspan="4" class="muted">No orders found.</td></tr>
+          <% } %>
+
+          <% stats.recentOrders.forEach(order => { %>
+            <tr>
+              <td><%= order._id.toString().slice(-6) %></td>
+              <td>
+                <% order.items.forEach(item => { %>
+                  <div><%= item.product %> x <%= item.qty %></div>
+                <% }) %>
+              </td>
+              <td>$<%= order.total.toFixed(2) %></td>
+              <td><%= order.status %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  $(function () {
+    function money(value) {
+      return '$' + Number(value || 0).toFixed(2);
+    }
+
+    function drawOrders(orders) {
+      var rows = '';
+
+      if (!orders || orders.length === 0) {
+        rows = '<tr><td colspan="4" class="muted">No orders found.</td></tr>';
+      } else {
+        orders.forEach(function (order) {
+          var items = order.items.map(function (item) {
+            return '<div>' + item.product + ' x ' + item.qty + '</div>';
+          }).join('');
+
+          rows += '<tr>' +
+            '<td>' + order._id.slice(-6) + '</td>' +
+            '<td>' + items + '</td>' +
+            '<td>' + money(order.total) + '</td>' +
+            '<td>' + order.status + '</td>' +
+          '</tr>';
+        });
+      }
+
+      $('#recentOrders').html(rows);
+    }
+
+    function loadSalesData() {
+      $.getJSON('/api/sales-data', function (data) {
+        $('#totalRevenue').text(money(data.totalRevenue));
+        $('#totalOrders').text(data.totalOrders);
+        $('#topProduct').text(data.topProduct);
+        $('#topProductQty').text(data.topProductQty + ' sold');
+        $('#lastUpdated').text('Updated ' + new Date().toLocaleTimeString());
+        drawOrders(data.recentOrders);
+      });
+    }
+
+    setInterval(loadSalesData, 10000);
+  });
+</script>

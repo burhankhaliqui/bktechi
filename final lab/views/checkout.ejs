@@ -1,0 +1,36 @@
+<section class="checkout-page">
+  <div class="checkout-card">
+    <h2>Your Bag</h2>
+    <p class="auth-meta">Review your selected products and complete checkout.</p>
+
+    <% if (cart.length === 0) { %>
+      <div class="empty-state">
+        <h3>Your bag is empty</h3>
+        <p>Choose a product from the store before checkout.</p>
+        <a href="/products" class="btn primary">Continue Shopping</a>
+      </div>
+    <% } else { %>
+      <div class="bag-list">
+        <% cart.forEach(item => { %>
+          <div class="bag-item">
+            <img src="<%= item.image %>" alt="<%= item.name %>">
+            <div>
+              <h3><%= item.name %></h3>
+              <p>Quantity: <%= item.qty %></p>
+            </div>
+            <strong>$<%= (item.price * item.qty).toFixed(2) %></strong>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="checkout-total">
+        <span>Total</span>
+        <strong>$<%= total.toFixed(2) %></strong>
+      </div>
+
+      <form action="/checkout" method="POST">
+        <button type="submit" class="btn primary btn-full">Complete Checkout</button>
+      </form>
+    <% } %>
+  </div>
+</section>
